@@ -1,0 +1,42 @@
+{
+  "name": "vrls-tasks",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "license": "MIT",
+  "keywords": [
+    "tasks",
+    "queue",
+    "async"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/vitorrloureiro/vrls-tasks"
+  },
+  "files": [
+    "./dist"
+  ],
+  "main": "./dist/vrls-tasks.umd.cjs",
+  "module": "./dist/vrls-tasks.js",
+  "exports": {
+    ".": {
+      "import": "./dist/vrls-tasks.js",
+      "require": "./dist/vrls-tasks.umd.cjs",
+      "types": "./dist/main.d.ts"
+    }
+  },
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "preview": "vite preview",
+    "test": "vitest src/tasks",
+    "coverage": "vitest run --coverage src/tasks"
+  },
+  "devDependencies": {
+    "@vitest/coverage-v8": "^1.4.0",
+    "typescript": "^5.2.2",
+    "vite": "^5.2.0",
+    "vite-plugin-dts": "^3.8.1",
+    "vitest": "^1.4.0"
+  }
+}
