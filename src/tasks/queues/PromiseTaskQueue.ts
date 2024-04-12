@@ -1,12 +1,21 @@
 import type { Task } from "../types/Task";
 import type { CallbacksArray } from "../types/CallbacksArray";
 
+import { SimpleEventTarget } from "vrls-simple-event-target";
+
 import { createTask } from "../createTask";
 
 type EnqueueMultipleReturn<T extends CallbacksArray> = { [K in keyof T]: ReturnType<T[K]> };
-export class PromiseTaskQueue {
+type EventsMap = {
+  queuefinished: () => void;
+};
+export class PromiseTaskQueue extends SimpleEventTarget<EventsMap> {
   #queue: Task<any>[] = [];
   #isRunning = false;
+
+  constructor() {
+    super(["queuefinished"]);
+  }
 
   enqueue<T>(callback: () => Promise<T>) {
     const task = createTask(callback);
@@ -47,5 +56,6 @@ export class PromiseTaskQueue {
       }
     }
     this.#isRunning = false;
+    this.dispatchEvent("queuefinished");
   }
 }

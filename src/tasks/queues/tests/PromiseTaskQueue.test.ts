@@ -43,7 +43,7 @@ describe("PromiseTaskQueue", () => {
     it("should handle task errors without stopping the queue", async () => {
       const mockPromiseQueue = new PromiseTaskQueue();
       const errorMessage = "Error in task";
-      const expectedNumber = 42;
+      const expectedNumber = 3.14;
 
       const failingTask = vi.fn(
         () => new Promise((_, rej) => setTimeout(() => rej(new Error(errorMessage)), TASK1_TIMEOUT))
@@ -94,7 +94,7 @@ describe("PromiseTaskQueue", () => {
     it("should handle errors in one of the tasks without stopping the queue", async () => {
       const mockPromiseQueue = new PromiseTaskQueue();
       const errorMessage = "Error in task";
-      const expectedNumber = 42;
+      const expectedNumber = 3.14;
 
       const failingTask = vi.fn(
         () => new Promise((_, rej) => setTimeout(() => rej(new Error(errorMessage)), TASK1_TIMEOUT))
@@ -114,5 +114,20 @@ describe("PromiseTaskQueue", () => {
       expect(failingTask).toHaveBeenCalled();
       expect(succeedingTask).toHaveBeenCalled();
     });
+  });
+
+  it("should dispatch 'queuefinished' when queue is finished", async () => {
+    const mockPromiseQueue = new PromiseTaskQueue();
+    const mockDispatchEvent = vi.fn();
+    vi.spyOn(mockPromiseQueue, "dispatchEvent").mockImplementation(mockDispatchEvent);
+
+    const promises1 = mockPromiseQueue.enqueueMultiple([() => Promise.resolve(), () => Promise.resolve()]);
+    expect(mockDispatchEvent).not.toBeCalled();
+    await Promise.all(promises1);
+    expect(mockDispatchEvent).toBeCalledTimes(1);
+
+    const promises2 = mockPromiseQueue.enqueueMultiple([() => Promise.resolve(), () => Promise.resolve()]);
+    await Promise.all(promises2);
+    expect(mockDispatchEvent).toBeCalledTimes(2);
   });
 });

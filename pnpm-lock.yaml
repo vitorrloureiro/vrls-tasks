@@ -4,6 +4,11 @@ settings:
   autoInstallPeers: true
   excludeLinksFromLockfile: false
 
+dependencies:
+  vrls-simple-event-target:
+    specifier: ^0.1.1
+    version: 0.1.1
+
 devDependencies:
   '@vitest/coverage-v8':
     specifier: ^1.4.0
@@ -1597,6 +1602,10 @@ packages:
       - supports-color
       - terser
     dev: true
+
+  /vrls-simple-event-target@0.1.1:
+    resolution: {integrity: sha512-+DOK7fi5DW+rlrmGJJDC37w25eadqEBWolzeFjDou1PQB6SGWtQDihLli/949y+f9gjqydy93dPIchoucA66Bw==}
+    dev: false
 
   /vue-template-compiler@2.7.16:
     resolution: {integrity: sha512-AYbUWAJHLGGQM7+cNTELw+KsOG9nl2CnSv467WobS5Cv9uk3wFcnr1Etsz2sEIHEZvw1U+o9mRlEO6QbZvUPGQ==}

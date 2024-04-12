@@ -10,20 +10,21 @@
 - **TypeScript Support:** Provides comprehensive type definitions for a strongly-typed development approach.
 - **Modern Integration:** Designed with ES Module support, facilitating integration into contemporary web development projects.
 - **Multiple Task Enqueueing:** Allows adding multiple tasks at once with `enqueueMultiple`, returning a tuple of promises corresponding to the tasks' resolutions.
+- **Event-Driven Notifications:** Supports event handling to notify when all tasks in the queue have been completed with the `queuefinished` event.
 
 ## Installation
 
-To integrate `vrls-tasks` into your project, use npm:
+To integrate `vrls-tasks` into your project, use pnpm:
 
-```bash
-npm install vrls-tasks
-```
+\```bash
+pnpm add vrls-tasks
+\```
 
 ## Usage
 
 Begin with `vrls-tasks` effortlessly:
 
-```javascript
+\```javascript
 import { PromiseTaskQueue } from "vrls-tasks";
 
 const queue = new PromiseTaskQueue();
@@ -40,9 +41,12 @@ queue.enqueue(task2).then(console.log); // Logs: Task 2 completed
 const [task1Promise, task2Promise] = queue.enqueueMultiple([task1, task2]);
 
 Promise.all([task1Promise, task2Promise]).then(console.log); // Logs: ["Task 1 completed", "Task 2 completed"]
-```
 
-This example demonstrates not only how to add individual tasks to the queue but also how to utilize `enqueueMultiple` to add several tasks at once, enhancing flexibility in task management.
+// Event handling for queue completion
+queue.addEventListener('queuefinished', () => console.log('All tasks have been processed.'));
+\```
+
+This example demonstrates not only how to add individual tasks to the queue but also how to utilize `enqueueMultiple` to add several tasks at once, and how to handle events when all tasks are completed.
 
 ## Contributing
 
