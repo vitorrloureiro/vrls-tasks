@@ -130,4 +130,20 @@ describe("PromiseTaskQueue", () => {
     await Promise.all(promises2);
     expect(mockDispatchEvent).toBeCalledTimes(2);
   });
+
+  it("should correctly return isRunning state", async () => {
+    const mockPromiseQueue = new PromiseTaskQueue();
+
+    expect(mockPromiseQueue.isRunning).toBe(false);
+
+    const promises = mockPromiseQueue.enqueueMultiple([
+      () => new Promise((res) => setTimeout(res, TASK1_TIMEOUT)),
+      () => new Promise((res) => setTimeout(res, TASK2_TIMEOUT)),
+    ]);
+
+    expect(mockPromiseQueue.isRunning).toBe(true);
+    await vi.runAllTimersAsync();
+    await Promise.all(promises);
+    expect(mockPromiseQueue.isRunning).toBe(false);
+  });
 });

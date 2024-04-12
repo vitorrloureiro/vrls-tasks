@@ -11,6 +11,7 @@
 - **Modern Integration:** Designed with ES Module support, facilitating integration into contemporary web development projects.
 - **Multiple Task Enqueueing:** Allows adding multiple tasks at once with `enqueueMultiple`, returning a tuple of promises corresponding to the tasks' resolutions.
 - **Event-Driven Notifications:** Supports event handling to notify when all tasks in the queue have been completed with the `queuefinished` event.
+- **Run State Monitoring:** Exposes a `isRunning` property to allow monitoring whether the queue is currently processing tasks.
 
 ## Installation
 

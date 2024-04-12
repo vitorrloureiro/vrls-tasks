@@ -17,6 +17,10 @@ export class PromiseTaskQueue extends SimpleEventTarget<EventsMap> {
     super(["queuefinished"]);
   }
 
+  get isRunning() {
+    return this.#isRunning;
+  }
+
   enqueue<T>(callback: () => Promise<T>) {
     const task = createTask(callback);
     this.#queue.push(task);
