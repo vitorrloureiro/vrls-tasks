@@ -11,6 +11,14 @@ export default defineConfig({
       name: "vrls-tasks",
       fileName: "vrls-tasks",
     },
+    rollupOptions: {
+      external: ["vrls-simple-event-target"],
+      output: {
+        globals: {
+          "vrls-simple-event-target": "vrls-simple-event-target",
+        },
+      },
+    },
   },
   test: {
     coverage: {
