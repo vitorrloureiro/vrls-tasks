@@ -30,7 +30,8 @@
     "build": "tsc && vite build",
     "preview": "vite preview",
     "test": "vitest src/tasks",
-    "coverage": "vitest run --coverage src/tasks"
+    "coverage": "vitest run --coverage src/tasks",
+    "bench": "vitest bench"
   },
   "devDependencies": {
     "@vitest/coverage-v8": "^1.4.0",
