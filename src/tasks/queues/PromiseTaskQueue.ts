@@ -9,6 +9,11 @@ type EnqueueMultipleReturn<T extends CallbacksArray> = { [K in keyof T]: ReturnT
 type EventsMap = {
   queuefinished: () => void;
 };
+
+/**
+ * A task queue that runs callbacks as soon as they are enqueued,
+ * in order, waiting for the current one to finish before starting the next one.
+ */
 export class PromiseTaskQueue extends SimpleEventTarget<EventsMap> {
   #queue: Task<any>[] = [];
   #isRunning = false;
